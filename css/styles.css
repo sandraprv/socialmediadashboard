@@ -1,3 +1,4 @@
+/* ---------- MAIN CSS ---------- */
 :root {
   --color-bg: hsl(0, 0%, 100%);
   --color-top-bg-pattern: hsl(225, 100%, 98%);
@@ -6,10 +7,10 @@
   --font-color2: hsl(230, 17%, 14%);
   --toggle-color-bg: hsl(230, 22%, 74%);
   --toggle-color-button: hsl(0, 0%, 100%);
+  --color-hover: hsla(229, 22%, 75%, 0.678);
 }
 
 .dark-mode {
-  /* filter: invert(100%); */
   --color-bg: hsl(230, 17%, 14%);
   --color-top-bg-pattern: hsl(232, 19%, 15%);
   --color-card-bg: hsl(228, 28%, 20%);
@@ -17,6 +18,7 @@
   --font-color2: hsl(0, 0%, 100%);
   --toggle-color-bg: linear-gradient(to right, #378fe6, #3eda82);
   --toggle-color-button: hsl(230, 17%, 14%);
+  --color-hover: hsl(230, 24%, 25%);
 }
 
 * {
@@ -28,17 +30,21 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  height: 100vh;
+}
+
 body {
   background-color: var(--color-bg);
-  padding: 2rem 2rem 0rem 2rem;
   min-width: 250px;
 }
 
-.container {
+.main-container {
   max-width: 340px;
   min-width: 250px;
+  padding: 2rem;
   margin: auto;
-  padding-bottom: 50px;
 }
 
 header {
@@ -52,7 +58,9 @@ header {
 }
 
 h1 {
+  color: var(--font-color2);
   font-size: 1.7rem;
+  margin-bottom: 0.4rem;
 }
 
 h2 {
@@ -69,23 +77,42 @@ h4 {
   font-weight: 400;
   margin-bottom: 1.2rem;
 }
-h5 {
+
+.up {
   color: hsl(163, 72%, 41%);
 }
-h5 img {
-  width: 0.7rem;
-  height: 0.5rem;
+
+.up::before {
+  content: url(../images/icon-up.svg);
+  vertical-align: text-top;
+  margin-right: 0.3rem;
+}
+
+.down {
+  color: hsl(356, 69%, 56%);
+}
+
+.down::before {
+  content: url(../images/icon-down.svg);
+  vertical-align: middle;
+  margin-right: 0.3rem;
 }
 
 .card {
   background-color: var(--color-card-bg);
-  border-radius: 10px;
+  border-radius: 5px;
   margin: 1rem auto;
 }
-/* -- FIRST PART - LG CARD -- */
 
-.top-div {
-  margin: auto;
+.card:hover {
+  background-color: var(--color-hover);
+  cursor: pointer;
+}
+
+/* ---------- FIRST PART ---------- */
+
+.top {
+  margin: auto auto 2rem auto;
 }
 
 .large {
@@ -105,7 +132,7 @@ h5 img {
 }
 
 .large h3 {
-  font-size: 4.5rem;
+  font-size: 4rem;
   margin-top: 1.3rem;
 }
 
@@ -129,33 +156,39 @@ h5 img {
   border-top-color: hsl(348, 97%, 39%);
 }
 
-/* -- SMALL CARDS -- */
+/* ---------- SECOND PART ---------- */
 
 .small {
-  padding: 20px;
-  display: grid;
-  grid-template-columns: auto auto;
-  align-content: space-between;
-  justify-content: space-between;
+  position: relative;
+  height: 8rem;
+}
+
+.small h2 {
+  position: absolute;
+  top: 1.2rem;
+  left: 1.2rem;
 }
 
 .small h3 {
-  font-size: 3rem;
+  font-size: 2rem;
+  position: absolute;
+  bottom: 1.2rem;
+  left: 1.2rem;
 }
 
 .sml-cd-icon {
-  padding-left: 50px;
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
 }
 
 .small h5 {
+  position: absolute;
+  bottom: 1.2rem;
+  right: 1.2rem;
 }
 
-.small h5 img {
-  margin-right: 4px;
-  vertical-align: middle;
-}
-
-/* -- SWITCH BUTTON -- */
+/* ---------- SWITCH BTN ---------- */
 
 .dark-mode-div {
   display: flex;
@@ -193,6 +226,11 @@ h5 img {
   transition: all 0.3s;
 }
 
+.switch:hover {
+  background: linear-gradient(to right, #378fe6, #3eda82);
+  cursor: pointer;
+}
+
 .checkbox:checked + .switch::after {
   right: 23px;
 }
@@ -201,22 +239,27 @@ h5 img {
   display: none;
 }
 
-/* FOOTER */
+/* ---------- FOOTER ---------- */
 
 .attribution {
+  font-size: 9px;
   text-align: center;
   height: 15px;
-  margin-top: -15px;
+  margin-top: -10px;
+  color: var(--color-hover);
 }
 .attribution a {
+  font-size: 9px;
   font-weight: 100;
-  color: var(--font-color1);
+  color: var(--color-hover);
 }
 
-@media only screen and (min-width: 780px) {
-  .container {
-    box-sizing: border-box;
-    max-width: 90%;
+/* ---------- TABLET SCREEN ----------*/
+
+@media only screen and (min-width: 600px) {
+  .main-container {
+    max-width: 100%;
+    min-height: 90vh;
   }
 
   header {
@@ -242,20 +285,25 @@ h5 img {
     padding-right: 1rem;
   }
 
-  .top-div {
-    box-sizing: border-box;
+  .container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, 290px);
-    justify-content: space-evenly;
+    column-gap: 2rem;
+    grid-template-columns: repeat(2, 48%);
   }
 
   .card {
-    min-width: 270px;
+    min-width: 100%;
+  }
+}
+
+/* ---------- DESKTOP SCREEN ----------*/
+
+@media only screen and (min-width: 1000px) {
+  .main-container {
+    padding: 2rem 8rem;
   }
 
-  .bottom-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 290px);
-    justify-content: space-evenly;
+  .container {
+    grid-template-columns: repeat(4, 23%);
   }
 }
